@@ -58,6 +58,13 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth-ktx'
     implementation 'com.google.firebase:firebase-firestore-ktx'
 
+
+    //http server
+    implementation platform("org.http4k:http4k-bom:4.19.0.0")
+    implementation "org.http4k:http4k-core"
+    implementation "org.http4k:http4k-server-undertow"
+    implementation "org.http4k:http4k-client-apache"
+
 }
 
 apply plugin: 'com.android.application'
