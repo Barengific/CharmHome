@@ -48,6 +48,9 @@ class MainActivity : AppCompatActivity() {
         createNotificationChannel()
         sendNoti()
 
+
+
+        //HTTP server
         val app = { request: Request -> Response(OK).body("Hello, ${request.query("name")}!") }
 
         val server = app.asServer(Undertow(9000)).start()
@@ -58,7 +61,7 @@ class MainActivity : AppCompatActivity() {
 
         println(client(request))
 
-        server.stop()
+//        server.stop()
 
 
     }
