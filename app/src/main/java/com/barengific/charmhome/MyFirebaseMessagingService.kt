@@ -50,10 +50,9 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 //        remoteMessage.notification?.body?.let { sendNotification(it) }
 
         Log.d("aaaaaaaa", "noti sneds heerere")
-//        sendNotification("barzzzzz")
-        Log.d("aaaaaaaaaaaaaaaaa", "noti senttse")
+        sendNotification("barzzzzz")
 
-        sendNoti()
+        Log.d("aaaaaa", "noti senttse")
 
         // Check if message contains a notification payload.
         remoteMessage.notification?.let {
@@ -64,20 +63,6 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         // message, here is where that should be initiated. See sendNotification method below.
     }
     // [END receive_message]
-
-    private fun sendNoti(){
-        val CHANNEL_ID = "mychannel_1"
-        var builder = NotificationCompat.Builder(this, CHANNEL_ID)
-            .setSmallIcon(R.drawable.ic_launcher_background)
-            .setContentTitle("yup")
-            .setContentText("ahaha")
-            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-
-        with(NotificationManagerCompat.from(this)) {
-            // notificationId is a unique int for each notification that you must define
-            notify(12345, builder.build())
-        }
-    }
 
     private fun createNotificationChannel() {
         // Create the NotificationChannel, but only on API 26+ because
@@ -156,7 +141,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         Log.d("aaaaainNOTi", "herererere")
 //        val channelId = getString(R.string.default_notification_channel_id)
         val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
-        val notificationBuilder = NotificationCompat.Builder(this, "yesBarz")
+        val notificationBuilder = NotificationCompat.Builder(this, "mychannel_1")
             .setSmallIcon(R.drawable.ic_launcher_background)
             .setContentTitle(getString(R.string.fcm_message_test))
             .setContentText(messageBody)
