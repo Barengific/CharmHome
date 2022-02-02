@@ -29,6 +29,16 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
+    packagingOptions {
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/INDEX'
+        exclude 'META-INF/INDEX.LIST'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/DEPENDENCIES'
+    }
 }
 
 dependencies {
@@ -62,9 +72,9 @@ dependencies {
     implementation platform("org.http4k:http4k-bom:4.19.0.0")
     implementation "org.http4k:http4k-core"
     implementation "org.http4k:http4k-server-undertow"
-    implementation "org.http4k:http4k-server-jetty"
+//    implementation "org.http4k:http4k-server-jetty"
     implementation "org.http4k:http4k-client-apache"
-    implementation "org.http4k:http4k-client-apache-async"
+//    implementation "org.http4k:http4k-client-apache-async"
     implementation "org.http4k:http4k-format-gson"
 
 }
