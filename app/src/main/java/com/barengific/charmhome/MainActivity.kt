@@ -5,12 +5,16 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.ktx.Firebase
 import com.google.firebase.messaging.FirebaseMessaging
+import com.google.firebase.messaging.ktx.messaging
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        Firebase.messaging.isAutoInitEnabled = true
 
         FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
             val TAG = "aaaaaToken"
@@ -23,11 +27,10 @@ class MainActivity : AppCompatActivity() {
             val token = task.result
 
             // Log and toast
-            //val msg = getString(R.string.msg_token_fmt, token)
             Log.d(TAG, token)
             Toast.makeText(baseContext, token, Toast.LENGTH_LONG).show()
         })
 
-        FirebaseMessaging.getInstance().getToken()
+        val tokenss =  FirebaseMessaging.getInstance().getToken()
     }
 }
