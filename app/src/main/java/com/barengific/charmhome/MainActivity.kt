@@ -19,6 +19,15 @@ import com.google.firebase.messaging.FirebaseMessaging
 import com.google.firebase.messaging.RemoteMessage
 import com.google.firebase.messaging.ktx.messaging
 
+
+import org.http4k.client.ApacheClient
+import org.http4k.core.Method
+import org.http4k.core.Request
+import org.http4k.core.Response
+import org.http4k.core.Status.Companion.OK
+import org.http4k.server.Undertow
+import org.http4k.server.asServer
+
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,25 +35,22 @@ class MainActivity : AppCompatActivity() {
 
         Firebase.messaging.isAutoInitEnabled = true
         FirebaseMessaging.getInstance()
-
         FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
             val TAG = "aaaaaToken"
             if (!task.isSuccessful) {
                 Log.d(TAG, "Fetching FCM registration token failed", task.exception)
                 return@OnCompleteListener
             }
-
-            // Get new FCM registration token
             val token = task.result
-
-            // Log and toast
             Log.d(TAG, token)
-//            Toast.makeText(baseContext, token, Toast.LENGTH_LONG).show()
         })
-
         val tokenss =  FirebaseMessaging.getInstance().getToken()
         createNotificationChannel()
         sendNoti()
+
+
+
+        
     }
 
 
