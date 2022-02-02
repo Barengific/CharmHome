@@ -21,14 +21,22 @@ import com.google.firebase.messaging.ktx.messaging
 
 
 import org.http4k.client.ApacheClient
-import org.http4k.core.Method
-import org.http4k.core.Request
-import org.http4k.core.Response
+import org.http4k.core.*
 import org.http4k.core.Status.Companion.OK
+import org.http4k.filter.DebuggingFilters
+import org.http4k.routing.bind
+import org.http4k.routing.routes
 import org.http4k.server.Undertow
 import org.http4k.server.asServer
 
 class MainActivity : AppCompatActivity() {
+
+    val app: HttpHandler = routes(
+        "/ping" bind Method.GET to {
+            Response(OK).body("pong")
+        }
+    )
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -50,17 +58,26 @@ class MainActivity : AppCompatActivity() {
 
 
 
-        //HTTP server
-        val app = { request: Request -> Response(OK).body("Hello, ${request.query("name")}!") }
+        val printingApp: HttpHandler = DebuggingFilters.PrintRequest().then(app)
+        //TODO
 
-        val server = app.asServer(Undertow(9000)).start()
+        val server = printingApp.asServer(Undertow(9000)).start()
 
-        val client = ApacheClient()
+        println("Server started on " + server.port())
 
-        val request = Request(Method.GET, "http://localhost:9000").query("name", "John Doe")
 
-        println(client(request))
 
+//        //HTTP server
+//        val app = { request: Request -> Response(OK).body("Hello, ${request.query("name")}!") }
+//
+//        val server = app.asServer(Undertow(9000)).start()
+//
+//        val client = ApacheClient()
+//
+//        val request = Request(Method.GET, "http://localhost:9000").query("name", "John Doe")
+//
+//        println(client(request))
+//
 //        server.stop()
 
 
