@@ -143,8 +143,8 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
         val notificationBuilder = NotificationCompat.Builder(this, "mychannel_1")
             .setSmallIcon(R.drawable.ic_launcher_background)
-            .setContentTitle(getString(R.string.fcm_message_test))
-            .setContentText(messageBody)
+            .setContentTitle(getString(R.string.fcm_message_test))//
+            .setContentText(messageBody)//
             .setAutoCancel(true)
             .setSound(defaultSoundUri)
             .setContentIntent(pendingIntent)
