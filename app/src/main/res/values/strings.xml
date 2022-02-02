@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">CharmHome</string>
+    <string name="fcm_message_test">Test FCM msggG</string>
 </resources>
