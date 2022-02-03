@@ -58,13 +58,13 @@ class MainActivity : AppCompatActivity() {
 
 
 
-        val printingApp: HttpHandler = DebuggingFilters.PrintRequest().then(app)
-        //TODO
-
-        val server = printingApp.asServer(Undertow(9000)).start()
-
-        println("Server started on " + server.port())
-
+//        val printingApp: HttpHandler = DebuggingFilters.PrintRequest().then(app)
+//        //TODO
+//
+//        val server = printingApp.asServer(Undertow(9000)).start()
+//
+//        println("Server started on " + server.port())
+//
 
 
 //        //HTTP server
