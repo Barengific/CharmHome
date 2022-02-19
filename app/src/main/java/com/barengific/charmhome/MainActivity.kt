@@ -18,6 +18,11 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.messaging.FirebaseMessaging
 import com.google.firebase.messaging.RemoteMessage
 import com.google.firebase.messaging.ktx.messaging
+import io.ktor.application.*
+import io.ktor.response.*
+import io.ktor.routing.*
+import io.ktor.server.engine.*
+import io.ktor.server.netty.*
 
 
 import org.http4k.client.ApacheClient
@@ -28,6 +33,7 @@ import org.http4k.routing.bind
 import org.http4k.routing.routes
 import org.http4k.server.Undertow
 import org.http4k.server.asServer
+import kotlin.concurrent.thread
 
 class MainActivity : AppCompatActivity() {
 
@@ -58,6 +64,22 @@ class MainActivity : AppCompatActivity() {
 
 
 
+        thread {
+            Thread.sleep(1000)
+            println("test")
+
+            embeddedServer(Netty, 8080) {
+                routing {
+                    get("/") {
+                        call.respondText("Hello, world!")
+                    }
+                }
+            }.start(wait = true)
+
+
+        }
+
+
 //        val printingApp: HttpHandler = DebuggingFilters.PrintRequest().then(app)
 //        //TODO
 //
@@ -82,7 +104,6 @@ class MainActivity : AppCompatActivity() {
 
 
     }
-
 
     private fun sendNoti(){
         val CHANNEL_ID = "mychannel_1"
